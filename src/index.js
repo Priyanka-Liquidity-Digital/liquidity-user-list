@@ -1,8 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+
+import 'font-awesome/scss/font-awesome.scss'
+import 'bootstrap/scss/bootstrap.scss';
+import './index.scss';
+
+import 'jquery/dist/jquery.min.js'
+import 'popper.js/dist/popper.min.js';
+import 'bootstrap/dist/js/bootstrap.min.js';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

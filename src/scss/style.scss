@@ -1,0 +1,343 @@
+$bg-container:#FAFAFB;
+$bg-hover: #E0E0E0;
+$white: #fff;
+
+$text-dark: #09112E;
+$text-light: #9295A0;
+
+$text-light-opacity: #9295a033;
+$text-datk-opacity: #2345c733;
+$nav-bg-opacity: #1d379933;
+
+
+$sub-heading: #B5B8C0;
+
+$primary : #2345C7;
+$success : #20BA82;
+
+// Sidebar 
+
+.sidebar {
+    margin: 0;
+    padding: 0;
+    width: 224px;
+    background-color: $white;
+    position: absolute;
+    height: 100vh;
+    overflow-y: hidden;
+    top: 0;
+
+    .nav-link{
+        border-left:6px solid $text-light-opacity;
+    }
+
+    .side-tabs{
+        a {
+            display: block;
+            color: $text-dark;
+            font-size:14px;
+            line-height:20px;
+            margin-bottom: 0;
+            text-align:left;
+            padding: 16px 30px;
+            text-decoration: none;
+    
+            &:hover{
+                color: $primary;
+            }
+        }
+    }
+
+    .sidenav-active{
+        background-color: $bg-container;
+        color: $primary !important;
+        border-left:6px solid $text-datk-opacity;
+    } 
+
+}
+
+.logo{
+    margin: 40px 40px 70px 30px;
+    .liquidity-logo{
+        width: 100%;
+        height: 42px;
+    }
+}
+
+.nav-custom{
+    background-color: $bg-container;
+    padding:0px !important;
+    .navbar-nav{
+        .nav-item{
+            .nav-link{
+                font-size:18px;
+                line-height:20px;
+                font-weight: 400;
+                margin-bottom:0;
+                color: $text-dark;
+                background-color: transparent;
+                border:0;
+                &:focus, &:active{
+                    box-shadow: none;
+                    outline:none;
+                }
+            }
+
+            .dropdown-menu{
+                padding:0;
+                box-shadow: none;
+                border-radius:5px;
+                .dropdown-item{
+                    color: $text-dark;
+                    text-align:left;
+                    font-size:14px;
+                    padding:8px 12px;
+
+                    &:hover{
+                        background-color: $nav-bg-opacity;
+                        color: $text-dark;
+                    }
+
+                    &:hover, &:focus{
+                        outline:none;
+                        box-shadow: none;
+                    }
+                }
+            }
+        }
+        .dropdown-menu{
+            position:absolute !important;
+            right:0 !important;
+            left:auto;
+        }
+    }
+}
+
+.footer-text{
+    padding:15px 0;
+    position: fixed;
+    bottom:0;
+    p{
+        font-family: 'Roboto', sans-serif;
+        font-size:12px;
+        font-weight:400;
+        margin-bottom: 0;
+        margin-top:2px;
+        color:$text-dark;
+        padding-left:20px;
+    }
+    .mail > a{
+        font-family: 'Roboto', sans-serif;
+        font-size:12px;
+        font-weight:400;
+        margin-bottom: 0;
+        padding:0;
+        color:$primary;
+        cursor:pointer;
+        &:hover{
+            color:#0000ff;
+            text-decoration: none;
+        }
+    }
+}
+
+.main-container {
+    margin-left: 200px;
+    padding: 24px 24px 24px 50px;
+    background-color: $bg-container;
+    height: 100vh;
+}
+
+  
+@media screen and (max-width: 767px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: absolute;
+
+        .sidenav-active{
+            border-left:0;
+            border-bottom:2px solid $text-light
+        }
+
+        a{
+            padding:10px;
+            font-size:14px;
+        }
+    }
+    .sidebar a {
+        float: left;
+    }
+    .logo {
+        padding-top: 15px;
+        padding-left: 15px;
+        height: 100px;
+    }
+
+    .nav-custom {
+        background-color:transparent;
+        padding: 10px 15px !important;
+        position: absolute !important;
+        top:15px !important;
+        right:0 !important;
+
+    }
+
+    .main-container {
+        padding-top: 15px;
+        margin-left: 0;
+        margin-top: 130px;
+        padding-left: 0;
+    }
+
+    .footer-text{
+        display:none;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .sidebar a {
+      text-align: center;
+      float: none;
+    }
+}
+
+.inner-container{
+    .main-heading{
+        font-family: 'Roboto', sans-serif;
+        font-weight:700;
+        font-size:28px;
+        color:$text-dark;
+        text-align: left;
+        margin-bottom:20px;
+    }
+}
+
+
+@media screen and (max-width: 767px){
+    .inner-container{
+        padding:5px 15px;
+        .main-heading{
+            font-size:24px;
+            margin-bottom:15px;
+        }
+    }
+}
+
+// Tabs
+
+.tab-content{
+    .show{
+        opacity:1;
+    }
+}
+
+.nav-tabs{
+    li{
+        padding:6px 12px 6px 0; 
+        a{
+            font-family: 'Roboto', sans-serif;
+            font-size:16px;
+            color:$text-light;
+            font-weight:700;
+            padding:0 15px 0 0;
+
+            &:hover{
+                color:$sub-heading;
+                text-decoration:none;
+            }
+            &:focus{
+                box-shadow: none;
+                outline: none;
+            }
+        }
+        .active{
+            border-bottom:1px solid $primary;
+            color:$text-dark;
+            padding-bottom:10px;
+        }
+    }
+}
+
+.tabs-content{
+    font-family: 'Roboto', sans-serif;
+    background-color: $white;
+    border-radius: 5px;  
+    font-weight: 400;
+    padding:15px;
+    margin-top:25px;
+    cursor: pointer;
+    p{
+        font-size:16px;
+        color:$primary;
+        margin-bottom:15px;
+    }
+    p > span{
+        &:hover{
+            color:$primary;
+            opacity:0.75; 
+        }
+    }
+    p > span > i{
+        font-size:16px;
+    }
+}
+
+.custom-table{
+    thead{
+        background-color: $bg-hover;
+    }
+    thead > tr > th, tbody > tr > td {
+        font-size:14px;
+        border:0;
+        border-bottom:0;
+        vertical-align: middle;
+        &:hover{
+            color:$text-light;
+        }
+    }
+    thead th {
+        border:0;
+    }
+    thead > tr > th > i{
+        color:$text-light;
+    }
+    thead > tr{
+        &:hover{
+            background-color: $bg-container;
+        }
+    }
+    thead > tr > th{
+        font-weight:700;
+    }
+    tbody > tr > td{
+       color:$text-dark;
+       font-weight:400;
+       font-size:14px;
+       .sub-heading{
+           color: $text-light;
+       }
+    }
+    tbody > tr {
+        &:hover{
+            background-color: $bg-container;
+            color:$text-light;
+            td{
+                color:$text-light;
+            }
+        }
+    }
+    
+}
+
+// .in-process{
+//     font-size:10px !important;
+//     color:$primary;
+//     margin-right:5px;
+// }
+
+// .closed{
+//     font-size:10px !important;
+//     color:$success;
+//     margin-right:5px;
+// }
