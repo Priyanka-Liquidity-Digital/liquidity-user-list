@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Tabs from '../components/Tabs';
+import Tabs from '../components/SubTabs/UserManagement/UserManagementTabs';
 // import UserDealInformationModal from '../components/Modal/UserDealInformationModal';
 
 class UserManagement extends Component {

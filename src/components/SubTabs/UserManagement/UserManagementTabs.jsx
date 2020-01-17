@@ -1,9 +1,8 @@
 import React from 'react';
 
-// import ExternalIssuancesTabContent from './ExternalIssuancesTabContent';
-// import FevoriteIssuancesTabContent from './FevoriteIssuancesTabContent';
-// import MyIssuancesTabContent from './MyIssuancesTabContent';
-// import MNDAManagementTabContent from './MyIssuancesTabContent';
+import Originators from "./Originators/Originators";
+import RegisteredReps from "./RegisteredReps/RegisteredReps";
+import Users from "./Users/Users";
 
 const Tabs = () => {
     return (
@@ -16,16 +15,13 @@ const Tabs = () => {
 
             <div className="tab-content">
                 <div id="tab1" className="tab-pane fade">
-                    {/* <ExternalIssuancesTabContent /> */}
-                    <h3> First tab </h3>
+                    <Originators />
                 </div>
                 <div id="tab2" className="tab-pane fade">
-                    {/* <FevoriteIssuancesTabContent /> */}
-                    <h3> Second tab </h3>
+                   <RegisteredReps />
                 </div>
                 <div id="tab3" className="tab-pane fade active show">
-                    {/* <MyIssuancesTabContent /> */}
-                    <h3> Third tab </h3>
+                    <Users />
                 </div>
             </div>
         </div>

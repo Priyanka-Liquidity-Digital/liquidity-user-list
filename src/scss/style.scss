@@ -9,11 +9,8 @@ $text-light-opacity: #9295a033;
 $text-datk-opacity: #2345c733;
 $nav-bg-opacity: #1d379933;
 
-
-$sub-heading: #B5B8C0;
-
 $primary : #2345C7;
-$success : #20BA82;
+$dark-blue: #2345C7;
 
 // Sidebar 
 
@@ -22,7 +19,7 @@ $success : #20BA82;
     padding: 0;
     width: 224px;
     background-color: $white;
-    position: absolute;
+    position: fixed;
     height: 100vh;
     overflow-y: hidden;
     top: 0;
@@ -145,7 +142,7 @@ $success : #20BA82;
     margin-left: 200px;
     padding: 24px 24px 24px 50px;
     background-color: $bg-container;
-    height: 100vh;
+    // height: 100vh;
 }
 
   
@@ -234,16 +231,17 @@ $success : #20BA82;
 
 .nav-tabs{
     li{
-        padding:6px 12px 6px 0; 
+        padding:6px 12px 6px 0;
+        margin-right: 25px; 
         a{
             font-family: 'Roboto', sans-serif;
-            font-size:16px;
+            font-size:15px;
             color:$text-light;
-            font-weight:700;
+            font-weight:400;
             padding:0 15px 0 0;
 
             &:hover{
-                color:$sub-heading;
+                color:#333333;
                 text-decoration:none;
             }
             &:focus{
@@ -252,9 +250,10 @@ $success : #20BA82;
             }
         }
         .active{
-            border-bottom:1px solid $primary;
+            border-bottom:2px solid $primary;
             color:$text-dark;
-            padding-bottom:10px;
+            font-weight: 500;
+            padding-bottom:8px;
         }
     }
 }
@@ -285,16 +284,14 @@ $success : #20BA82;
 
 .custom-table{
     thead{
-        background-color: $bg-hover;
+        background-color: #C7CDD433;
+
     }
     thead > tr > th, tbody > tr > td {
         font-size:14px;
         border:0;
         border-bottom:0;
         vertical-align: middle;
-        &:hover{
-            color:$text-light;
-        }
     }
     thead th {
         border:0;
@@ -302,9 +299,9 @@ $success : #20BA82;
     thead > tr > th > i{
         color:$text-light;
     }
-    thead > tr{
-        &:hover{
-            background-color: $bg-container;
+    thead > tr > th:hover{
+        i{
+            color:$text-dark;
         }
     }
     thead > tr > th{
@@ -313,31 +310,79 @@ $success : #20BA82;
     tbody > tr > td{
        color:$text-dark;
        font-weight:400;
-       font-size:14px;
-       .sub-heading{
-           color: $text-light;
-       }
+       font-size:12px;
+    }
+    tbody > tr > td.email-primary{
+        color:$primary;
     }
     tbody > tr {
-        &:hover{
-            background-color: $bg-container;
-            color:$text-light;
-            td{
-                color:$text-light;
-            }
+        border-bottom:1px solid $text-light-opacity;
+
+        &:last-child{
+            border-bottom:0px solid transparent;
         }
+    }
+
+    .more-actions{
+        height:16px;
+        width:16px;
     }
     
 }
 
-// .in-process{
-//     font-size:10px !important;
-//     color:$primary;
-//     margin-right:5px;
-// }
+//search
 
-// .closed{
-//     font-size:10px !important;
-//     color:$success;
-//     margin-right:5px;
-// }
+.search-addUser{
+    .search-user{
+        width:300px;
+        .input-group{
+            .form-control{
+                font-size:14px;
+                font-style: italic;
+                line-height:34px;
+                color:$text-dark;
+                margin-bottom:15px;
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+    
+                &:hover,&:focus{
+                    border-color:#1d3799;
+                    box-shadow: none;
+                }
+            }
+            .search-button-user{
+                background-color: $dark-blue;
+                color:$white;
+                font-size:12px;
+                height:35px;
+                margin-bottom:15px;
+    
+                &:focus{
+                    box-shadow: none;
+                    border:0;
+                }
+    
+            }
+        }
+    }
+
+    .add-user{
+        .btn-add-user{
+            font-size:12px;
+            padding:6px 25px;
+            float: right;
+            background-color: transparent;
+            color:$dark-blue;
+            border:1px solid $dark-blue;
+
+            &:hover{
+                background-color: $dark-blue;
+                color:$white;
+            }
+            &:hover,&:focus{
+                outline: none;
+                box-shadow: none;
+            }
+        }
+    }
+}

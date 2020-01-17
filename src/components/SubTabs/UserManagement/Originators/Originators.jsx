@@ -1,11 +1,12 @@
 import React from 'react';
 
-import TableDetails from './MyIssuancesTableDetails';
-
 const Originator = () => {
     return (
         <div className="tabs-content">
-            <TableDetails />
+            <div>
+                <h4> First tab </h4>
+                <p>Originator</p>
+            </div>
         </div>
     )
 }
