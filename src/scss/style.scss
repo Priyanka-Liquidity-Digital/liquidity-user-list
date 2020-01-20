@@ -9,6 +9,7 @@ $text-light-opacity: #9295a033;
 $text-datk-opacity: #2345c733;
 $nav-bg-opacity: #1d379933;
 
+$form-border: #1d3799;
 $primary : #2345C7;
 $dark-blue: #2345C7;
 
@@ -346,7 +347,7 @@ $dark-blue: #2345C7;
                 border-bottom-right-radius: 0;
     
                 &:hover,&:focus{
-                    border-color:#1d3799;
+                    border-color:$form-border;
                     box-shadow: none;
                 }
             }
@@ -385,4 +386,154 @@ $dark-blue: #2345C7;
             }
         }
     }
+}
+
+// Modal
+
+.modal-tabs{
+    margin-top:30px;
+    .nav-tabs{
+        li{
+            width:50%;
+        }
+    }
+}
+
+.modal.show{
+    padding-right:0 !important;
+}
+
+.custom-modal{
+    .modal-dialog{
+        margin:0 0 0 auto ;
+    }
+    .modal-content{
+        border-top-left-radius: 5px;
+        border-top-right-radius: 0;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 0;
+        background-color: $bg-container;
+        font-family: 'Roboto', sans-serif;
+        padding:32px 32px;
+        height: 100vh;
+        overflow-y: scroll;
+
+        .close{
+            font-size:14px;
+            font-weight:700;
+            color: $text-dark;
+
+            .fa-times{
+                height:12px;
+                width:12px;
+            }
+
+            &:hover{
+                color:#09112E;
+            }
+            &:focus{
+                outline:none;
+                color:#09112E;
+            }
+        }
+    }
+}
+
+.custom-modal .modal-content .modal-body{
+    padding:0;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    border-radius: 5px;
+}
+  
+::-webkit-scrollbar-track {
+    background: $white; 
+    border-radius: 5px;
+}
+   
+::-webkit-scrollbar-thumb {
+    background: $text-light; 
+    border-radius: 5px;
+}
+
+.form-modal-heading{
+    font-family: 'Roboto', sans-serif;
+    font-size:18px;
+    color:$text-dark;
+    padding-bottom:10px;
+    margin-bottom:20px;
+    border-bottom:1px solid $text-light;
+}
+
+.add-user-form{
+    font-family: 'Roboto', sans-serif;
+    label{
+        font-size:14px;
+        color:$text-light;
+        margin-bottom:10px; 
+    }
+    input{
+        font-size:13px;
+        height:40px;
+        color:$text-dark;
+
+        &:focus{
+            outline: none;
+            box-shadow: none;
+            border-color:$form-border
+        }
+    }
+    .errorMessage{
+        font-size:12px;
+        color:#ff0000;
+    }
+    .form-modal-buttons{
+        display: block;
+        position: fixed;
+        bottom: 32px;
+        right: 32px;
+        .cancel{
+            color: $primary;
+            background-color: transparent;
+            border:0;
+            height: 40px;
+            width:135px;
+            margin-right:15px;
+            border-radius: 5px;
+    
+            &:hover, &:focus{
+                color: $primary;
+                background-color: rgba(29, 55, 153, 0.2);
+            }
+            &:focus{
+                box-shadow: none;
+                outline: none;
+            }
+        }
+        .add-user{
+            font-size:16px;
+            color:$white;
+            padding:10px 15px;
+            height: 40px;
+            width:135px;
+            background-color: $primary;
+            border:0;
+            color: $white;
+            border-radius: 5px;
+
+    
+            &:hover{
+                border-color: transparent;
+                background-color: $form-border;
+            }
+            &:focus{
+                box-shadow: none;
+                outline: none;
+            }
+        }
+    }
+   
+   
 }
