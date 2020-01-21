@@ -10,7 +10,7 @@ const phoneNoRegex = RegExp(
 );
 
 
-class AddUserForm extends Component{
+class AddUserFormWithSwitchCaseValidation extends Component{
     constructor(props){
         super(props);
         this.state = {
@@ -26,13 +26,6 @@ class AddUserForm extends Component{
                 PhoneNumber: ''
             }
         };
-
-        this.inputAutoFocus = React.createRef();
-    }
-
-    onFocus = event => {
-        event.preventDefault();
-        this.inputAutoFocus.current.focus();
     }
 
     handleChange = event =>{
@@ -56,7 +49,7 @@ class AddUserForm extends Component{
                     break;
             case "Department":
                 formErrors.Department =
-                    value.length < 2 ? "Enter Department" : "";
+                    value.length < 3 ? "Enter Department" : "";
                     break;
             case "PhoneNumber":
                 formErrors.PhoneNumber = phoneNoRegex.test(value)
@@ -69,11 +62,6 @@ class AddUserForm extends Component{
           this.setState({ formErrors, [name]: value });
     };
 
-    handleNotification = event => {
-        event.preventDefault();
-
-        alert("New user is added");
-    }
 
     handleSubmit = event => {
         event.preventDefault();
@@ -92,13 +80,14 @@ class AddUserForm extends Component{
         .catch(error => {
             console.log(error);
         })
+
     }
     
     render(){
         const {Name, Email, Department, PhoneNumber, formErrors} = this.state
         return (
             <div className="mt-4">
-                <h4 className="form-modal-heading" onClick={this.onFocus}> Add User</h4>
+                <h4 className="form-modal-heading"> Add User</h4>
 
                 <form className="add-user-form" onSubmit={this.handleSubmit}>
                    <div className="row">
@@ -107,8 +96,7 @@ class AddUserForm extends Component{
                                 <label>Name</label>
                                 <input type="text" name="Name" placeholder="Enter Name" 
                                     value={Name} onChange={this.handleChange}
-                                    className={ formErrors.Name.length > 0 ? "error" : null, "form-control"}
-                                    ref={this.inputAutoFocus} />
+                                    className={ formErrors.Name.length > 0 ? "error" : null, "form-control"} />
 
                                 {formErrors.Name.length > 0 && (
                                     <span className="errorMessage">{formErrors.Name}</span>
@@ -166,4 +154,148 @@ class AddUserForm extends Component{
     }
 }
 
-export default AddUserForm
+export default AddUserFormWithSwitchCaseValidation
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { Component } from 'react';
+// import axios from 'axios';
+// import validator from 'validator';
+
+
+// class AddUserForm extends Component{
+//     constructor(props){
+//         super(props);
+//         this.state = {
+//             Name : '',
+//             Email: '',
+//             Department: '',
+//             PhoneNumber: '',
+
+//             formValidity: false,
+//             submitDisabled: false,
+//             formErrors: {
+//                 Name : 'Enter Full Name',
+//                 Email: 'Enter a valid e-mail',
+//                 Department: 'Enter Department',
+//                 PhoneNumber: 'Enter a valid 10 digit Phone number'
+//             }
+//         };
+//         this.errorType = "Success";
+//         this.visibleCss = "none";
+//     }
+
+//     handleChange = event => {
+//         event.preventDefault();
+
+//         this.setState({
+//             [event.target.name]: event.target.value
+//         });
+
+//     };
+
+//     handleSubmit = event => {
+//         event.preventDefault();
+
+//         const user = {
+//             Name:           this.state.Name,
+//             Email:          this.state.Email,
+//             Department:     this.state.Department,
+//             PhoneNumber:    this.state.PhoneNumber
+//         }
+
+//         axios.post(`https://peaceful-wildwood-93487.herokuapp.com/users/register`, user)
+//         .then(res => {
+//             window.location.reload(false);
+//         })
+//         .catch(error => {
+//             console.log(error);
+//         })
+
+//     }
+    
+//     render(){
+//         const {Name, Email, Department, PhoneNumber, formErrors} = this.state
+//         return (
+//             <div className="mt-4">
+//                 <h4 className="form-modal-heading"> Add User</h4>
+
+//                 <form className="add-user-form" onSubmit={this.handleSubmit}>
+//                    <div className="row">
+//                         <div className="col-md-6">
+//                             <div className="form-group">
+//                                 <label>Name</label>
+//                                 <input type="text" name="Name" placeholder="Enter Name" className="form-control"
+//                                     value={Name} onChange={this.handleChange} />
+
+//                                 <span className="errorMessage">{formErrors.Name}</span>       
+//                             </div>
+//                         </div>
+//                         {/* <div className="col-md-6">
+//                             <div className="form-group">
+//                                 <label>Email</label>
+//                                 <input type="text" name="Email" placeholder="Enter e-mail"
+//                                     value={Email} onChange={this.handleChange} 
+//                                     className={ formErrors.Name.length > 0 ? "error" : null, "form-control"}/>
+
+//                                 {formErrors.Email.length > 0 && (
+//                                     <span className="errorMessage">{formErrors.Email}</span>
+//                                 )}
+//                             </div>
+//                         </div> */}
+//                    </div>
+//                    <div className="row">
+//                         {/* <div className="col-md-6">
+//                             <div className="form-group">
+//                                 <label>Department</label>
+//                                 <input type="text" name="Department" placeholder="Enter Department" 
+//                                     value={Department} onChange={this.handleChange}
+//                                     className={ formErrors.Name.length > 0 ? "error" : null, "form-control"} />
+
+//                                 {formErrors.Department.length > 0 && (
+//                                     <span className="errorMessage">{formErrors.Department}</span>
+//                                 )}
+//                             </div>
+//                         </div> */}
+//                         {/* <div className="col-md-6">
+//                             <div className="form-group">
+//                                 <label>PhoneNumber</label>
+//                                 <input type="number" name="PhoneNumber" placeholder="Enter Phone No" 
+//                                 value={PhoneNumber} onChange={this.handleChange}
+//                                 className={ formErrors.Name.length > 0 ? "error" : null, "form-control"} />
+
+//                                 {formErrors.PhoneNumber.length > 0 && (
+//                                     <span className="errorMessage">{formErrors.PhoneNumber}</span>
+//                                 )}
+//                             </div>
+//                         </div> */}
+//                    </div>
+
+//                    <div className="form-modal-buttons">
+//                        <button type="button" data-dismiss="modal" className="cancel">Cancel</button>
+//                        <button type="submit" className="add-user">Add</button>
+//                    </div>
+
+//                 </form>
+//             </div>
+//         )
+//     }
+// }
+
+// export default AddUserForm
