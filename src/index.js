@@ -4,6 +4,7 @@ import './index.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+import 'react-notifications/lib/notifications.css';
 import 'font-awesome/scss/font-awesome.scss'
 import 'bootstrap/scss/bootstrap.scss';
 import './index.scss';

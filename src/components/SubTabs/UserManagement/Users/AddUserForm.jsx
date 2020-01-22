@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+
 
 const emailRegex = RegExp(
     /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
@@ -24,22 +26,13 @@ class AddUserForm extends Component{
                 Email: '',
                 Department: '',
                 PhoneNumber: ''
-            }
+            },
         };
-
-        this.inputAutoFocus = React.createRef();
-    }
-
-    onFocus = event => {
-        event.preventDefault();
-        this.inputAutoFocus.current.focus();
+        
     }
 
     handleChange = event =>{
         event.preventDefault();
-        // this.setState({
-        //     [event.target.name]: event.target.value
-        // })
         const { name, value } = event.target;
 
         let formErrors = { ...this.state.formErrors };
@@ -69,10 +62,29 @@ class AddUserForm extends Component{
           this.setState({ formErrors, [name]: value });
     };
 
-    handleNotification = event => {
-        event.preventDefault();
+    createNotification = (type) => {
+        return () => {
+          switch (type) {
+            case 'info':
+              NotificationManager.info('Info message');
+              break;
+            case 'success':
+              NotificationManager.success('Success message', 'New User added Successfully', 3000);
+              break;
+            case 'warning':
+              NotificationManager.warning('Warning message', 'Close after 3000ms', 3000);
+              break;
+            case 'error':
+              NotificationManager.error('Error message', 'Click me!', 5000, () => {
+                alert('callback');
+              });
+              break;
+          }
+        };
+    };
 
-        alert("New user is added");
+    refreshUserList = () => {
+        window.location.reload(false);
     }
 
     handleSubmit = event => {
@@ -87,7 +99,12 @@ class AddUserForm extends Component{
 
         axios.post(`https://peaceful-wildwood-93487.herokuapp.com/users/register`, user)
         .then(res => {
-            window.location.reload(false);
+            this.setState({
+                Name : '',
+                Email: '',
+                Department: '',
+                PhoneNumber: '',
+            })
         })
         .catch(error => {
             console.log(error);
@@ -98,7 +115,7 @@ class AddUserForm extends Component{
         const {Name, Email, Department, PhoneNumber, formErrors} = this.state
         return (
             <div className="mt-4">
-                <h4 className="form-modal-heading" onClick={this.onFocus}> Add User</h4>
+                <h4 className="form-modal-heading"> Add User</h4>
 
                 <form className="add-user-form" onSubmit={this.handleSubmit}>
                    <div className="row">
@@ -108,7 +125,8 @@ class AddUserForm extends Component{
                                 <input type="text" name="Name" placeholder="Enter Name" 
                                     value={Name} onChange={this.handleChange}
                                     className={ formErrors.Name.length > 0 ? "error" : null, "form-control"}
-                                    ref={this.inputAutoFocus} />
+                                    autoFocus={true}
+                                    autoComplete="off" />
 
                                 {formErrors.Name.length > 0 && (
                                     <span className="errorMessage">{formErrors.Name}</span>
@@ -120,7 +138,8 @@ class AddUserForm extends Component{
                                 <label>Email</label>
                                 <input type="text" name="Email" placeholder="Enter e-mail"
                                     value={Email} onChange={this.handleChange} 
-                                    className={ formErrors.Name.length > 0 ? "error" : null, "form-control"}/>
+                                    className={ formErrors.Name.length > 0 ? "error" : null, "form-control"}
+                                    autoComplete="off"/>
 
                                 {formErrors.Email.length > 0 && (
                                     <span className="errorMessage">{formErrors.Email}</span>
@@ -134,7 +153,9 @@ class AddUserForm extends Component{
                                 <label>Department</label>
                                 <input type="text" name="Department" placeholder="Enter Department" 
                                     value={Department} onChange={this.handleChange}
-                                    className={ formErrors.Name.length > 0 ? "error" : null, "form-control"} />
+                                    className={ formErrors.Name.length > 0 ? "error" : null, "form-control"}
+                                    autoComplete="off"
+                                    />
 
                                 {formErrors.Department.length > 0 && (
                                     <span className="errorMessage">{formErrors.Department}</span>
@@ -146,7 +167,9 @@ class AddUserForm extends Component{
                                 <label>PhoneNumber</label>
                                 <input type="tel" name="PhoneNumber" placeholder="Enter Phone No" 
                                 value={PhoneNumber} onChange={this.handleChange}
-                                className={ formErrors.Name.length > 0 ? "error" : null, "form-control"} />
+                                className={ formErrors.Name.length > 0 ? "error" : null, "form-control"}
+                                autoComplete="off"
+                                />
 
                                 {formErrors.PhoneNumber.length > 0 && (
                                     <span className="errorMessage">{formErrors.PhoneNumber}</span>
@@ -156,11 +179,13 @@ class AddUserForm extends Component{
                    </div>
 
                    <div className="form-modal-buttons">
-                       <button type="button" data-dismiss="modal" className="cancel">Cancel</button>
-                       <button type="submit" className="add-user">Add</button>
+                       <button type="button" data-dismiss="modal" className="cancel" onClick={this.refreshUserList}>Cancel</button>
+                       <button type="submit" className="add-user" onClick={this.createNotification('success')}>Add</button>
                    </div>
 
                 </form>
+
+                <NotificationContainer/>
             </div>
         )
     }

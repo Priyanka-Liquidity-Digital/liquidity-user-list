@@ -2,7 +2,7 @@ import React from 'react';
 
 import SearchUser from "./SearchUsers";
 import AddUser from "./AddUser";
-import UserTable from "./UserTable"
+import UserTable from "./UserTable";
 
 const Users = () => {
     return (

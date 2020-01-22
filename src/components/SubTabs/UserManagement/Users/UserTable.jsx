@@ -49,7 +49,23 @@ class UserTable extends Component {
                                     <td className="email-primary"><i className="fa fa-envelope mr-2" aria-hidden="true"></i> {user.Email}</td>
                                     <td>{user.PhoneNumber}</td>
                                     <td>{user.Department}</td>
-                                    <td><img src={MoreAction} alt="More actions" className="more-actions" /> </td>
+                                    <td>
+                                        <div className="btn-group">
+                                            <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <img src={MoreAction} alt="More actions" className="more-actions" />
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <button className="dropdown-item custom-dropdown-item" type="button">
+                                                    <i className="fa fa-pencil mr-2" aria-hidden="true"></i>Edit
+                                                </button>
+                                                <div class="dropdown-divider"></div>
+                                                <button className="dropdown-item custom-dropdown-item delete" type="button">
+                                                    <i className="fa fa-trash mr-2" aria-hidden="true"></i> Delete
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    
                                 </tr>
                             ))
                         }
