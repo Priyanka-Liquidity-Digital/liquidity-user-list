@@ -138,7 +138,7 @@ class AddUserForm extends Component{
                                 <label>Email</label>
                                 <input type="text" name="Email" placeholder="Enter e-mail"
                                     value={Email} onChange={this.handleChange} 
-                                    className={ formErrors.Name.length > 0 ? "error" : null, "form-control"}
+                                    className={ formErrors.Email.length > 0 ? "error" : null, "form-control"}
                                     autoComplete="off"/>
 
                                 {formErrors.Email.length > 0 && (
@@ -153,7 +153,7 @@ class AddUserForm extends Component{
                                 <label>Department</label>
                                 <input type="text" name="Department" placeholder="Enter Department" 
                                     value={Department} onChange={this.handleChange}
-                                    className={ formErrors.Name.length > 0 ? "error" : null, "form-control"}
+                                    className={ formErrors.Department.length > 0 ? "error" : null, "form-control"}
                                     autoComplete="off"
                                     />
 
@@ -167,7 +167,7 @@ class AddUserForm extends Component{
                                 <label>PhoneNumber</label>
                                 <input type="tel" name="PhoneNumber" placeholder="Enter Phone No" 
                                 value={PhoneNumber} onChange={this.handleChange}
-                                className={ formErrors.Name.length > 0 ? "error" : null, "form-control"}
+                                className={ formErrors.PhoneNumber.length > 0 ? "error" : null, "form-control"}
                                 autoComplete="off"
                                 />
 
