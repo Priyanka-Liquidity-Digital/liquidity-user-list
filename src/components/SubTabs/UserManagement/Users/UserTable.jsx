@@ -135,16 +135,37 @@ class UserTable extends Component {
     }
 
 
-    deleteUser = (userEmail) => {
-        axios.delete(`https://peaceful-wildwood-93487.herokuapp.com/users/` + userEmail)
-            .then(res => {
-                window.confirm('Are you sure you wish to delete this item?')
-                const users = res.data;
-                console.log(users);
-            })
-            .catch(error => {
-                console.log(error);
-            })
+    // deleteUser = (userEmail) => {
+    //     axios.delete(`https://peaceful-wildwood-93487.herokuapp.com/users/` + userEmail)
+    //         .then(res => {
+    //             window.confirm('Are you sure you wish to delete this item?')
+    //             const users = res.data;
+    //             console.log(users);
+    //         })
+    //         .catch(error => {
+    //             console.log(error);
+    //         })
+    // }
+
+    handleDelete = (event) => {
+        event.preventDefault();
+
+        const user = {
+            Name: this.state.Name,
+            Email: this.state.Email,
+            Department: this.state.Department,
+            PhoneNumber: this.state.PhoneNumber
+        }
+
+        axios.delete(`https://peaceful-wildwood-93487.herokuapp.com/users/` + user.Email)
+        .then(res => {
+            const users = res.data;
+            console.log(users);
+            window.location.reload(false);
+        })
+        .catch(error => {
+            console.log(error);
+        })
     }
 
     render() {
@@ -195,7 +216,9 @@ class UserTable extends Component {
                                             <div className="dropdown-divider"></div>
                                             
                                             <button className="dropdown-item custom-dropdown-item delete" type="button"
-                                                onClick={() => this.deleteUser(user.Email)}
+                                                    data-toggle="modal" data-target="#deleteUser"
+                                                onClick={() => this.updateUser(user.Email)}
+                                                // onClick={() => this.deleteUser(user.Email)}
                                             >
                                                 <i className="fa fa-trash mr-2" aria-hidden="true"></i> Delete
                                             </button>
@@ -297,6 +320,23 @@ class UserTable extends Component {
                     </div>
                 </div>
 
+                <div className="modal modal-md delete-user-modal fade" id="deleteUser">
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                            <div className="modal-body">
+                                <form onSubmit={this.handleDelete}>
+                                    <h4>Confirm user removal</h4>
+                                    <p>This action can't be revert</p>
+                                    <div className="mt-4 float-right">
+                                        <button type="button" data-dismiss="modal" className="cancel">Cancel</button>
+                                        <button type="submit" className="remove" >Remove</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
                 <NotificationContainer />
             </div>
         )
@@ -307,19 +347,19 @@ export default UserTable
 
 
 
-{/* <div className="modal modal-md delete-user-modal fade" id="deleteUser">
-    <div className="modal-dialog">
-        <div className="modal-content">
-            <div className="modal-body">
-                <div>
-                    <h4>Confirm user removal</h4>
-                    <p>This action can't be revert</p>
-                    <div className="mt-4 float-right">
-                        <button type="button" data-dismiss="modal" className="cancel">Cancel</button>
-                        <button type="button" className="remove" >Remove</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> */}
+// {/* <div className="modal modal-md delete-user-modal fade" id="deleteUser">
+//     <div className="modal-dialog">
+//         <div className="modal-content">
+//             <div className="modal-body">
+//                 <div>
+//                     <h4>Confirm user removal</h4>
+//                     <p>This action can't be revert</p>
+//                     <div className="mt-4 float-right">
+//                         <button type="button" data-dismiss="modal" className="cancel">Cancel</button>
+//                         <button type="button" className="remove" >Remove</button>
+//                     </div>
+//                 </div>
+//             </div>
+//         </div>
+//     </div>
+// </div> */}
