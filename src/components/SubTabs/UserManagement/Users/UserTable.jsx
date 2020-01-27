@@ -100,35 +100,31 @@ class UserTable extends Component {
         window.location.reload(false);
     }
 
-    updateUser = (user) => {
-        console.log(user.Name);
-        console.log(user.Email);
-        console.log(user.Department);
-        console.log(user.PhoneNumber);
-
+    updateUser = (userEmail) => {
+        axios.get(`https://peaceful-wildwood-93487.herokuapp.com/users/` + userEmail)
+            .then(res => {
+                this.setState({
+                    Name: res.data[0].Name,
+                    Email :res.data[0].Email,
+                    Department :res.data[0].Department,
+                    PhoneNumber :res.data[0].PhoneNumber,
+                });
+            })
     }
+
 
     handleUpdateSubmit = (event) => {
         event.preventDefault();
 
         const user = {
-            Name:           this.state.Name,
-            Email:          this.state.Email,
-            Department:     this.state.Department,
-            PhoneNumber:    this.state.PhoneNumber
+            Name: this.state.Name,
+            Email: this.state.Email,
+            Department: this.state.Department,
+            PhoneNumber: this.state.PhoneNumber
 
-            // Name: 'Priyanka',
-            // Email: 'priyankatakkekar@gmail.com',
-            // Department: 'Development',
-            // PhoneNumber: '8585858585'
-
-            // Name: 'Bala V',
-            // Email: 'bala#gmail.com',
-            // Department: 'Manager',
-            // PhoneNumber: '6363636363'
         }
 
-        axios.put(`https://peaceful-wildwood-93487.herokuapp.com/users/`, user)
+        axios.put(`https://peaceful-wildwood-93487.herokuapp.com/users/`+ user.Email, user)
             .then(res => {
                 const users = res.data;
                 console.log(users);
@@ -152,7 +148,7 @@ class UserTable extends Component {
     }
 
     render() {
-        const { Name, Email, Department, PhoneNumber, formErrors } = this.state
+        const {formErrors } = this.state
 
         if (this.state.error) {
             return <p className="text-danger">{this.state.error.message}</p>
@@ -191,17 +187,13 @@ class UserTable extends Component {
                                         <div className="dropdown-menu dropdown-menu-right">
                                             <button className="dropdown-item custom-dropdown-item" type="button"
                                                 data-toggle="modal" data-target="#editUser"
-                                                onClick={() => this.updateUser(user)}
+                                                onClick={() => this.updateUser(user.Email)}
                                             >
                                                 <i className="fa fa-pencil mr-2" aria-hidden="true"></i>Edit
                                             </button>
 
-
-
-
-
-
                                             <div className="dropdown-divider"></div>
+                                            
                                             <button className="dropdown-item custom-dropdown-item delete" type="button"
                                                 onClick={() => this.deleteUser(user.Email)}
                                             >
@@ -209,94 +201,6 @@ class UserTable extends Component {
                                             </button>
 
 
-                                        </div>
-
-                                        <div className="mt-4">
-
-                                            <div className="modal custom-modal fade" id="editUser">
-                                                <div className="modal-dialog">
-                                                    <div className="modal-content">
-                                                        <div className="modal-body">
-                                                            <button type="button" className="close" data-dismiss="modal" onClick={this.refreshUserList}>Close <i className="fa fa-times ml-2" aria-hidden="true"></i></button>
-                                                            <div className="mt-4">
-                                                                <h4 className="form-modal-heading"> Update User Information</h4>
-
-                                                                <form method="POST" className="add-user-form" onSubmit={this.handleUpdateSubmit}>
-                                                                    <div className="row">
-                                                                        <div className="col-md-6">
-                                                                            <div className="form-group">
-                                                                                <label>Name</label>
-                                                                                <input type="text" name="Name" placeholder="Enter Name"
-                                                                                    defaultValue="Empty"
-
-                                                                                    onChange={this.handleChange}
-                                                                                    className={formErrors.Name.length > 0 ? "error" : null, "form-control"}
-                                                                                    autoFocus={true}
-                                                                                    autoComplete="off" />
-
-                                                                                {formErrors.Name.length > 0 && (
-                                                                                    <span className="errorMessage">{formErrors.Name}</span>
-                                                                                )}
-                                                                            </div>
-                                                                        </div>
-                                                                        <div className="col-md-6">
-                                                                            <div className="form-group">
-                                                                                <label>Email</label>
-                                                                                <input type="text" name="Email" placeholder="Enter e-mail"
-                                                                                    defaultValue={user.Email}
-                                                                                    onChange={this.handleChange}
-                                                                                    className={formErrors.Email.length > 0 ? "error" : null, "form-control"}
-                                                                                    autoComplete="off" />
-
-                                                                                {formErrors.Email.length > 0 && (
-                                                                                    <span className="errorMessage">{formErrors.Email}</span>
-                                                                                )}
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="row">
-                                                                        <div className="col-md-6">
-                                                                            <div className="form-group">
-                                                                                <label>Department</label>
-                                                                                <input type="text" name="Department" placeholder="Enter Department"
-                                                                                    defaultValue={user.Department}
-                                                                                    onChange={this.handleChange}
-                                                                                    className={formErrors.Department.length > 0 ? "error" : null, "form-control"}
-                                                                                    autoComplete="off"
-                                                                                />
-
-                                                                                {formErrors.Department.length > 0 && (
-                                                                                    <span className="errorMessage">{formErrors.Department}</span>
-                                                                                )}
-                                                                            </div>
-                                                                        </div>
-                                                                        <div className="col-md-6">
-                                                                            <div className="form-group">
-                                                                                <label>PhoneNumber</label>
-                                                                                <input type="tel" name="PhoneNumber" placeholder="Enter Phone No"
-                                                                                    defaultValue={user.PhoneNumber} onChange={this.handleChange}
-                                                                                    className={formErrors.PhoneNumber.length > 0 ? "error" : null, "form-control"}
-                                                                                    autoComplete="off"
-                                                                                />
-
-                                                                                {formErrors.PhoneNumber.length > 0 && (
-                                                                                    <span className="errorMessage">{formErrors.PhoneNumber}</span>
-                                                                                )}
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <div className="form-modal-buttons">
-                                                                        <button type="button" data-dismiss="modal" className="cancel" onClick={this.refreshUserList}>Cancel</button>
-                                                                        <button type="submit" className="add-user">Update</button>
-                                                                    </div>
-
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
 
@@ -306,6 +210,92 @@ class UserTable extends Component {
                         }
                     </tbody>
                 </table>
+
+                <div className="mt-4">
+                    <div className="modal custom-modal fade" id="editUser">
+                        <div className="modal-dialog">
+                            <div className="modal-content">
+                                <div className="modal-body">
+                                    <button type="button" className="close" data-dismiss="modal" onClick={this.refreshUserList}>Close <i className="fa fa-times ml-2" aria-hidden="true"></i></button>
+                                    <div className="mt-4">
+                                        <h4 className="form-modal-heading"> Update User Information</h4>
+
+                                        <form method="POST" className="add-user-form" onSubmit={this.handleUpdateSubmit}>
+                                            <div className="row">
+                                                <div className="col-md-6">
+                                                    <div className="form-group">
+                                                        <label>Name</label>
+                                                        <input type="text" name="Name" placeholder="Enter Name"
+                                                            defaultValue={this.state.Name}
+                                                            onChange={this.handleChange}
+                                                            className={formErrors.Name.length > 0 ? "error" : null, "form-control"}
+                                                            autoFocus={true}
+                                                            autoComplete="off" />
+
+                                                        {formErrors.Name.length > 0 && (
+                                                            <span className="errorMessage">{formErrors.Name}</span>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-6">
+                                                    <div className="form-group">
+                                                        <label>Email</label>
+                                                        <input type="text" name="Email" placeholder="Enter e-mail"
+                                                            defaultValue={this.state.Email}
+                                                            onChange={this.handleChange}
+                                                            className={formErrors.Email.length > 0 ? "error" : null, "form-control"}
+                                                            autoComplete="off" />
+
+                                                        {formErrors.Email.length > 0 && (
+                                                            <span className="errorMessage">{formErrors.Email}</span>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="row">
+                                                <div className="col-md-6">
+                                                    <div className="form-group">
+                                                        <label>Department</label>
+                                                        <input type="text" name="Department" placeholder="Enter Department"
+                                                            defaultValue={this.state.Department}
+                                                            onChange={this.handleChange}
+                                                            className={formErrors.Department.length > 0 ? "error" : null, "form-control"}
+                                                            autoComplete="off"
+                                                        />
+
+                                                        {formErrors.Department.length > 0 && (
+                                                            <span className="errorMessage">{formErrors.Department}</span>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                                <div className="col-md-6">
+                                                    <div className="form-group">
+                                                        <label>PhoneNumber</label>
+                                                        <input type="tel" name="PhoneNumber" placeholder="Enter Phone No"
+                                                            defaultValue={this.state.PhoneNumber} onChange={this.handleChange}
+                                                            className={formErrors.PhoneNumber.length > 0 ? "error" : null, "form-control"}
+                                                            autoComplete="off"
+                                                        />
+
+                                                        {formErrors.PhoneNumber.length > 0 && (
+                                                            <span className="errorMessage">{formErrors.PhoneNumber}</span>
+                                                        )}
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div className="form-modal-buttons">
+                                                <button type="button" data-dismiss="modal" className="cancel" onClick={this.refreshUserList}>Cancel</button>
+                                                <button type="submit" className="add-user">Update</button>
+                                            </div>
+
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <NotificationContainer />
             </div>
